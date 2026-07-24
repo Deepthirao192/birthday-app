@@ -19,6 +19,12 @@ steps {
 sh 'docker images'
 }
 }
+stage('Deploy Docker Container') {
+steps {
+sh 'docker rm -f birthday-app || true'
+sh 'docker run -d --name birthday-app -p 80:80 birthday-app:v1'
+}
+}
 }
 
 post {
