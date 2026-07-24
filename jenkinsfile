@@ -1,0 +1,33 @@
+pipeline {
+agent any
+
+stages {
+stage('Checkout') {
+steps {
+checkout scm
+}
+}
+
+stage('Build Docker Image') {
+steps {
+sh 'docker build -t birthday-app:v1 .'
+}
+}
+
+stage('Verify Docker Image') {
+steps {
+sh 'docker images'
+}
+}
+}
+
+post {
+success {
+echo '🎉 Birthday App Pipeline Completed Successfully!'
+}
+
+failure {
+echo '❌ Pipeline Failed'
+}
+}
+}
