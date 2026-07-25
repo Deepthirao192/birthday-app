@@ -1,64 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday ❤️</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday ❤️</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<div class="hero-photo">
-<img src="images/photo1.jpg" alt="Our Main Photo">
-</div>
+<div class="hearts"></div>
 
-<div class="photo-gallery">
-<img src="images/photo2.jpg" alt="Our Photo 2">
-<img src="images/photo3.jpg" alt="Our Photo 3">
-</div>
+<div class="container">
 
-<div class="countdown-container">
-<h2>🎂 Countdown to Your Birthday 🎂</h2>
-<h3 id="countdown"></h3>
-</div>
+    <!-- Hero Section -->
 
-<h2>Deployment Successful ✅</h2>
+    <div class="hero">
 
-<p>
-Dear Husband,
-</p>
+        <img src="images/photo1.jpg" alt="Main Photo" class="hero-img">
 
-<p>
-Today I deployed something more special than any application.
-It is my love, care, and wishes for you.
-</p>
+        <h1>🎂 Happy Birthday My Love ❤️</h1>
 
-<p>
-Just like a DevOps pipeline,
-every stage of our life together is built with trust,
-tested with patience,
-deployed with love,
-and monitored with care.
-</p>
+        <p class="subtitle">
+            Every day with you is my favorite deployment.
+        </p>
 
-<h2>Pipeline Status</h2>
+    </div>
 
-<pre>
-Git ✅ Success
-GitHub ✅ Success
-Docker ✅ Success
-Jenkins ✅ Success
-Kubernetes ⏳ learning
-Terraform ✅ Success
-Ansible ✅ Success
+    <!-- Countdown -->
 
-Final Deployment:
-❤️ Happy Birthday ❤️
-</pre>
+    <div class="card countdown-card">
 
-<button onclick="showMessage()">Click Here ❤️</button>
+        <h2>⏳ Countdown to Your Birthday</h2>
 
-<h2 id="message"></h2>
+        <h1 id="countdown"></h1>
+
+    </div>
+
+    <!-- Gallery -->
+
+    <h2>📸 Our Beautiful Memories</h2>
+
+    <div class="gallery">
+
+        <img src="images/photo2.jpg" alt="Photo 2">
+
+        <img src="images/photo3.jpg" alt="Photo 3">
+
+    </div>
+
+    <!-- Love Letter -->
+
+    <div class="card">
+
+        <h2>💌 Dear Husband</h2>
+
+        <p>
+            Today I deployed something more special than any application.
+            It is my love, care, and endless wishes for you.
+        </p>
+
+        <p>
+            Just like a DevOps pipeline,
+            every stage of our journey is built with trust,
+            tested with patience,
+            deployed with love,
+            and monitored with care.
+        </p>
+
+        <p>
+            Thank you for being my best friend,
+            my biggest supporter,
+            and the most wonderful husband.
+        </p>
+
+    </div>
+
+    <!-- Pipeline -->
+
+    <div class="card">
+
+        <h2>💻 DevOps Pipeline</h2>
+
+        <div class="pipeline">
+
+            <div class="row">
+                <span>Git</span>
+                <span>✅ Success</span>
+            </div>
+
+            <div class="row">
+                <span>GitHub</span>
+                <span>✅ Success</span>
+            </div>
+
+            <div class="row">
+                <span>Docker</span>
+                <span>✅ Success</span>
+            </div>
+
+            <div class="row">
+                <span>Jenkins</span>
+                <span>✅ Success</span>
+            </div>
+
+            <div class="row">
+                <span>Kubernetes</span>
+                <span>📚 Learning</span>
+            </div>
+
+            <div class="row">
+                <span>Terraform</span>
+                <span>✅ Success</span>
+            </div>
+
+            <div class="row">
+                <span>Ansible</span>
+                <span>✅ Success</span>
+            </div>
+
+        </div>
+
+        <h3 class="deploy">
+            🚀 Final Deployment: ❤️ Love Successfully Deployed ❤️
+        </h3>
+
+    </div>
+
+    <!-- Surprise -->
+
+    <button onclick="showMessage()">
+        ❤️ Click Here ❤️
+    </button>
+
+    <h2 id="message"></h2>
+
+    <!-- Footer -->
+
+    <footer>
+
+        Made with ❤️ especially for you.
+
+    </footer>
 
 </div>
 
