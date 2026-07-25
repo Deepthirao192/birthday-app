@@ -19,6 +19,16 @@ steps {
 sh 'docker images'
 }
 }
+
+stage('Cleanup Old Containers') {
+    steps {
+        sh '''
+        docker rm -f birthday-app || true
+        docker container prune -f || true
+        '''
+    }
+}
+
 stage('Deploy Docker Container') {
 steps {
 sh 'docker rm -f birthday-app || true'
