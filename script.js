@@ -3,23 +3,27 @@ document.getElementById("message").innerHTML =
 "❤️ Happy Birthday! May your life always be successful, healthy and filled with happiness.";
 }
 
-// Countdown starts here
-const birthday = new Date("August 9, 2026 00:00:00").getTime();
+const countdownElement = document.getElementById("countdown");
 
-setInterval(function () {
+const birthday = new Date("2026-08-09T00:00:00").getTime();
 
-const now = new Date().getTime();
-const distance = birthday - now;
+function updateCountdown() {
+  const now = Date.now();
+  const distance = birthday - now;
 
-const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  if (distance <= 0) {
+    countdownElement.innerHTML = "🎉 Happy Birthday! ❤️";
+    return;
+  }
 
-document.getElementById("countdown").innerHTML =
-days + " Days " +
-hours + " Hours " +
-minutes + " Minutes " +
-seconds + " Seconds";
+  const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((distance / (1000 * 60 * 60)) % 24);
+  const minutes = Math.floor((distance / (1000 * 60)) % 60);
+  const seconds = Math.floor((distance / 1000) % 60);
 
-}, 1000);
+  countdownElement.innerHTML =
+    `${days} Days ${hours} Hours ${minutes} Minutes ${seconds} Seconds`;
+}
+
+updateCountdown();
+setInterval(updateCountdown, 1000);
