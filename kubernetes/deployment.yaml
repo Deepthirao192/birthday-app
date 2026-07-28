@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: birthday-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: birthday-app
+  template:
+    metadata:
+      labels:
+        app: birthday-app
+    spec:
+      containers:
+      - name: birthday-app
+        image: birthday-app:v1
+        ports:
+        - containerPort: 80
