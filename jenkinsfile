@@ -21,6 +21,20 @@ pipeline {
             }
         }
 
+        stage('Deploy Docker Container') {
+            steps {
+                sh '''
+                docker rm -f birthday-app || true
+
+                docker run -d \
+                --restart=always \
+                --name birthday-app \
+                -p 80:80 \
+                birthday-app:v1
+                '''
+            }
+        }
+
         stage('Load Image into Minikube') {
             steps {
                 sh 'minikube image load birthday-app:v1'
@@ -69,7 +83,7 @@ pipeline {
 
     post {
         success {
-            echo '🎉 Birthday App deployed successfully to Kubernetes!'
+            echo '🎉 Birthday App deployed successfully to Docker and Kubernetes!'
         }
 
         failure {
