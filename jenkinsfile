@@ -1,57 +1,83 @@
 pipeline {
-agent any
+    agent any
 
-stages {
-stage('Checkout') {
-steps {
-checkout scm
-}
-}
+    stages {
 
-stage('Build Docker Image') {
-steps {
-sh 'docker build -t birthday-app:v1 .'
-}
-}
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
 
-stage('Verify Docker Image') {
-steps {
-sh 'docker images'
-}
-}
+        stage('Build Docker Image') {
+            steps {
+                sh 'docker build -t birthday-app:v1 .'
+            }
+        }
 
-stage('Cleanup Old Containers') {
-    steps {
-        sh '''
-        docker rm -f birthday-app || true
-        docker container prune -f || true
-        '''
+        stage('Verify Docker Image') {
+            steps {
+                sh 'docker images'
+            }
+        }
+
+        stage('Load Image into Minikube') {
+            steps {
+                sh 'minikube image load birthday-app:v1'
+            }
+        }
+
+        stage('Deploy to Kubernetes') {
+            steps {
+                sh '''
+                kubectl apply -f kubernetes/deployment.yaml
+                kubectl apply -f kubernetes/service.yaml
+                '''
+            }
+        }
+
+        stage('Restart Kubernetes Deployment') {
+            steps {
+                sh '''
+                kubectl rollout restart deployment birthday-app
+                kubectl rollout status deployment birthday-app
+                '''
+            }
+        }
+
+        stage('Verify Kubernetes Deployment') {
+            steps {
+                sh '''
+                echo "===== Deployments ====="
+                kubectl get deployments
+
+                echo "===== Pods ====="
+                kubectl get pods
+
+                echo "===== Services ====="
+                kubectl get svc
+                '''
+            }
+        }
+
+        stage('Docker Cleanup') {
+            steps {
+                sh 'docker image prune -f'
+            }
+        }
     }
-}
 
-stage('Deploy Docker Container') {
-steps {
-sh 'docker rm -f birthday-app || true'
-sh 'docker run -d --name birthday-app -p 80:80 birthday-app:v1'
-}
-}
-stage('Docker Cleanup') {
-    steps {
-        sh '''
-        docker image prune -f
-        '''
+    post {
+        success {
+            echo '🎉 Birthday App deployed successfully to Kubernetes!'
+        }
+
+        failure {
+            echo '❌ Pipeline Failed'
+        }
+
+        always {
+            echo 'Pipeline execution completed.'
+        }
     }
-}
-
-}
-
-post {
-success {
-echo '🎉 Birthday App Pipeline Completed Successfully!'
-}
-
-failure {
-echo '❌ Pipeline Failed'
-}
-}
 }
